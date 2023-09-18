@@ -1,5 +1,3 @@
-# Rareskills Solidity Bootcamp
-
 ## What problems ERC777 and ERC1363 solve?
 
 Both standards offer holders more control over their tokens. With the "old-school" and "basic" ERC-20, when a contract receives a token, there is no way to execute code after a transfer or approval.
