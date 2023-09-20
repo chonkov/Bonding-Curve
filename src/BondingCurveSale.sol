@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.21;
 
-import {Token} from "./Token.sol";
-import "erc-1363/ERC1363/IERC1363Receiver.sol";
+// import {Token} from "./Token.sol";
+import "lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol";
+
+import "lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol";
 
 /// @title BondginCurveSale
 /// @author Georgi
-/// @notice Bonding curve token sale that uses the 'Token' contract
-contract BondingCurveSale is Token, IERC1363Receiver {
-    uint256 public constant basicPrice = 0.001 ether;
-    uint256 public constant pricePerToken = 0.1 gwei;
+/// @notice Bonding curve token sale that uses the ERC1363
+contract BondingCurveSale is ERC1363, IERC1363Receiver {
+    uint256 public constant basicPrice = 1 ether;
+    uint256 public constant pricePerToken = 1 ether;
 
-    constructor(string memory _name, string memory _symbol) Token(_name, _symbol) {}
+    constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
 
     /// @notice Buy tokens with ethers
     /// @param amount uinst256 Amount of token to buy
@@ -43,8 +45,8 @@ contract BondingCurveSale is Token, IERC1363Receiver {
         return (curveBasePrice + curveExtraPrice);
     }
 
-    /// @notice Get the corrent price for a token
-    /// @return Current Price for a single token
+    /// @notice Get the correct price for a token
+    /// @return Current Price for a SINGLE token
     function currentPrice() external view returns (uint256) {
         return pricePerToken * totalSupply();
     }

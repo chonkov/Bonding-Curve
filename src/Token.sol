@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.21;
 
-import {ERC1363} from "./ERC1363.sol";
+import "lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol";
 import {Ownable} from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 /// @title Token
@@ -10,7 +10,7 @@ import {Ownable} from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 contract Token is ERC1363, Ownable {
     mapping(address => bool) private bannedAddress;
 
-    constructor(string memory _name, string memory _symbol) ERC1363(_name, _symbol) {}
+    constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
 
     /// @notice Owner is able to mint tokens
     /// @param to Address to which token will be minter
