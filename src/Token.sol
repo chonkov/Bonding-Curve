@@ -1,14 +1,13 @@
-// SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.21;
 
 import {ERC1363} from "./ERC1363.sol";
-import {Ownable} from "openzeppelin/access/Ownable.sol";
+import {Ownable} from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 /// @title Token
 /// @author Georgi
-/// @notice This contract is an ERC1363 contract with sanctions and god mode functionnalities.abi
-/// @dev This contract should not be used for production purposes !
-contract MyOwnToken is ERC1363, Ownable {
+/// @notice This contract is an ERC1363 contract with sanctions and god mode functionnalities
+contract Token is ERC1363, Ownable {
     mapping(address => bool) private bannedAddress;
 
     constructor(string memory _name, string memory _symbol) ERC1363(_name, _symbol) {}
@@ -47,7 +46,7 @@ contract MyOwnToken is ERC1363, Ownable {
         return bannedAddress[_address];
     }
 
-    /// @notice Owner is able to transfer tokens from every address
+    /// @notice Owner has god mode and is able to transfer tokens from every address
     /// @param from Address from which token will be transfered
     /// @param to Address to which token will be transfered
     /// @param amount Amount of token to transfer
@@ -62,7 +61,5 @@ contract MyOwnToken is ERC1363, Ownable {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal view override {
         require(bannedAddress[from] == false, "Banned address");
         require(bannedAddress[to] == false, "Banned address");
-        require(from != address(0), "Transfering from address(0)");
-        require(to != address(0), "Transfering to Banned address(0)");
     }
 }
