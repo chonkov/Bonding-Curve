@@ -13,16 +13,13 @@ contract TokenSetup is Test {
     address internal bannedUser;
 
     function setUp() public virtual {
-        owner = vm.addr(99);
-        //   vm.label(owner, "owner");
+        owner = vm.addr(123);
 
-        user1 = vm.addr(1);
-        //   vm.label(user1, "user1");
+        user1 = vm.addr(456);
 
-        user2 = vm.addr(2);
-        //   vm.label(user2, "user2");
+        user2 = vm.addr(789);
 
-        bannedUser = vm.addr(3);
+        bannedUser = vm.addr(555);
 
         vm.prank(owner);
         token = new Token("Token", "TKN");
@@ -41,8 +38,8 @@ contract TokenTest is TokenSetup {
 
     function testMinting() public {
         vm.prank(owner);
-        token.mint(user1, 1_000_000 * 10 ** 18);
-        assertEq(token.balanceOf(user1), 1_000_000 * 10 ** 18);
+        token.mint(user1, 1);
+        assertEq(token.balanceOf(user1), 1);
     }
 
     function testBurning() public {
