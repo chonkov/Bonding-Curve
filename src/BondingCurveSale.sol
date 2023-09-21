@@ -6,11 +6,11 @@ import "lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol";
 
 import "lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol";
 
-/// @title BondginCurveSale
+/// @title BondingCurveSale
 /// @author Georgi
 /// @notice Bonding curve token sale that uses the ERC1363
 contract BondingCurveSale is ERC1363, IERC1363Receiver {
-    uint256 public constant basicPrice = 1 ether;
+    uint256 public constant basePrice = 1 ether;
     uint256 public constant pricePerToken = 1 ether;
 
     constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
@@ -46,13 +46,13 @@ contract BondingCurveSale is ERC1363, IERC1363Receiver {
     }
 
     /// @notice Get the correct price for a token
-    /// @return Current Price for a SINGLE token
+    /// @return Current Price for a SINGLE token in WEI
     function currentPrice() external view returns (uint256) {
-        return pricePerToken * totalSupply();
+        return pricePerToken * totalSupply() / 10 ** 18;
     }
 
     function _calculatePrice(uint256 amount) internal view returns (uint256 curveBasePrice, uint256 curveExtraPrice) {
-        uint256 _currentPrice = basicPrice + (pricePerToken * totalSupply()) / 10 ** decimals();
+        uint256 _currentPrice = basePrice + (pricePerToken * totalSupply()) / 10 ** decimals();
         curveBasePrice = ((amount * _currentPrice)) / 10 ** decimals();
         curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
     }
