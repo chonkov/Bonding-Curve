@@ -1,10 +1,10 @@
-// SPDX-License-Identifier: Unlicense
-pragma solidity >=0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.21;
 
 import {Test, console2} from "forge-std/Test.sol";
 import {Token} from "../src/Token.sol";
 
-contract TokenSetup is Test {
+contract TokenTest is Test {
     Token internal token;
 
     address internal owner;
@@ -23,12 +23,6 @@ contract TokenSetup is Test {
 
         vm.prank(owner);
         token = new Token("Token", "TKN");
-    }
-}
-
-contract TokenTest is TokenSetup {
-    function setUp() public override {
-        super.setUp();
     }
 
     function testOwner() public {
