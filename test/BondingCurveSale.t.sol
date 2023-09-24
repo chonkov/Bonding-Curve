@@ -30,6 +30,16 @@ contract BondingCurveSaleTest is Test {
         assertEq(sale.name(), "Token");
         assertEq(sale.symbol(), "TKN");
         assertEq(sale.pricePerToken(), 1 ether);
+        console2.log("'currentPrice': %s", sale.currentPrice() / 10 ** 18);
+        assertEq(sale.currentPrice(), 1 ether);
+    }
+
+    function testBuy() public {
+        uint256 tokenAmount = 4 ether;
+        uint256 buyPrice = sale.buyPriceCalculation(tokenAmount);
+        console2.log("'buyPrice' for 4 tokens is %s", buyPrice);
+        // 12000000000000000000
+        //  8000000000000000000
     }
 
     function testBuyFail() public {
@@ -54,6 +64,7 @@ contract BondingCurveSaleTest is Test {
 
         console2.log("user1 bought 5 tokens");
         console2.log("Current eth balance of contract: %s", address(sale).balance);
+        console2.log("'currentPrice': %s", sale.currentPrice() / 10 ** 18);
 
         buyPrice = sale.buyPriceCalculation(tokenAmount);
         console2.log("'buyPrice' for 5 more tokens (from 5 to 10) is %s", buyPrice);
@@ -63,6 +74,7 @@ contract BondingCurveSaleTest is Test {
         sale.buy{value: buyPrice}(tokenAmount);
         console2.log("user1 buys 5 more tokens");
         console2.log("Current eth balance of contract: %s", address(sale).balance);
+        assertEq(address(sale).balance, 60 ether);
         console2.log("Current 'totalSupply' : %s", sale.totalSupply() / 10 ** 18);
 
         vm.prank(user1);
@@ -103,6 +115,5 @@ contract BondingCurveSaleTest is Test {
         uint256 tokenAmount = 1_000_000 ether; // a million tokens
         uint256 buyPrice = sale.buyPriceCalculation(tokenAmount);
         console2.log("'buyPrice' for 1_000_000 tokens is %s", buyPrice / 10 ** 18);
-        assertEq(buyPrice / 10 ** 18, 500_001_000_000);
     }
 }

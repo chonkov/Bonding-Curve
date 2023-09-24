@@ -48,7 +48,7 @@ contract BondingCurveSale is ERC1363, IERC1363Receiver {
     /// @notice Get the correct price for a token
     /// @return Current Price for a SINGLE token in WEI
     function currentPrice() external view returns (uint256) {
-        return pricePerToken * totalSupply() / 10 ** 18;
+        return basePrice + (pricePerToken * totalSupply());
     }
 
     function _calculatePrice(uint256 amount) internal view returns (uint256 curveBasePrice, uint256 curveExtraPrice) {
