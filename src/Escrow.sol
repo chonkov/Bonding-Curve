@@ -42,31 +42,34 @@ contract Escrow {
     using SafeERC20 for IERC20;
 
     mapping(address => uint256) accountBalance;
+    mapping(address => mapping(address => uint256)) withdrawTime;
 
-    event Deposit(address indexed, uint256);
+    event Deposit(address indexed, address indexed, uint256);
     event Withdraw(address indexed, address indexed, uint256);
 
     /// @notice Deposit function accepting ERC20 tokens
     /// @param token address An arbitrary token address used for making a deposit
+    /// @param to address The address to which the tokens are to be transfered
     /// @param amount uint256 The amount of tokens transferred
-    function deposit(IERC20 token, uint256 amount) external {
+    function deposit(IERC20 token, address to, uint256 amount) external {
         token.safeTransferFrom(msg.sender, address(this), amount); // A fee could potenitally be paid
         uint256 actualBal = token.balanceOf(address(this));
         accountBalance[msg.sender] = actualBal;
+        withdrawTime[msg.sender][to] = block.timestamp + 3 days;
 
-        emit Deposit(msg.sender, actualBal);
+        emit Deposit(msg.sender, to, actualBal);
     }
 
     /// @notice Withdraw function
     /// @param token address An arbitrary token address used for transfering value
-    /// @param to address The address to which the tokens are to be transfered
+    /// @param from address The address to which the tokens are to be transfered
     /// @param amount uint256 The amount of tokens transferred
-    function withdraw(IERC20 token, address to, uint256 amount) external {
-        require(accountBalance[msg.sender] >= amount, "Insufficient amount");
-        require(block.timestamp >= 2_000_000_000, "Can't withdraw yet");
+    function withdraw(IERC20 token, address from, uint256 amount) external {
+        require(accountBalance[from] >= amount, "Insufficient amount");
+        require(block.timestamp >= withdrawTime[from][msg.sender], "Can't withdraw yet");
 
-        token.safeTransfer(to, amount); // another fee would be paid if for the example the token is Tether
+        token.safeTransfer(from, amount); // another fee would be paid if for the example the token is Tether
 
-        emit Withdraw(msg.sender, to, amount);
+        emit Withdraw(from, msg.sender, amount);
     }
 }
