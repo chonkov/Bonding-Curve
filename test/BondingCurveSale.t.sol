@@ -58,9 +58,13 @@ contract BondingCurveSaleTest is Test {
         uint256 buyPrice = sale.buyPriceCalculation(tokenAmount);
         console2.log("'buyPrice' for 5 tokens is %s", buyPrice);
 
-        vm.prank(user1);
+        console2.log("'cooldown': %s", sale.cooldown(user1));
+
+        vm.startPrank(user1);
         vm.deal(user1, 100 ether);
         sale.buy{value: buyPrice}(tokenAmount);
+
+        console2.log("'cooldown': %s", sale.cooldown(user1));
 
         console2.log("user1 bought 5 tokens");
         console2.log("Current eth balance of contract: %s", address(sale).balance);
@@ -69,7 +73,11 @@ contract BondingCurveSaleTest is Test {
         buyPrice = sale.buyPriceCalculation(tokenAmount);
         console2.log("'buyPrice' for 5 more tokens (from 5 to 10) is %s", buyPrice);
 
-        vm.prank(user1);
+        console2.log("'cooldown': %s", sale.cooldown(user1));
+
+        uint256 blockNumber = block.number;
+        vm.roll(blockNumber + 5);
+
         vm.deal(user1, 100 ether);
         sale.buy{value: buyPrice}(tokenAmount);
         console2.log("user1 buys 5 more tokens");
@@ -77,7 +85,11 @@ contract BondingCurveSaleTest is Test {
         assertEq(address(sale).balance, 60 ether);
         console2.log("Current 'totalSupply' : %s", sale.totalSupply() / 10 ** 18);
 
-        vm.prank(user1);
+        vm.expectRevert("Cooldown period has not expired yet");
+        sale.transferAndCall(address(sale), 5 ether, bytes(""));
+
+        blockNumber = block.number;
+        vm.roll(blockNumber + 5);
         sale.transferAndCall(address(sale), 5 ether, bytes(""));
         console2.log("user1 sends 5 tokens to 'sale' (automatic sell)");
         console2.log("Current eth balance of contract: %s", address(sale).balance);
@@ -92,6 +104,9 @@ contract BondingCurveSaleTest is Test {
         vm.deal(user1, 100 ether);
         sale.buy{value: buyPrice}(tokenAmount);
 
+        uint256 blockNumber = block.number;
+        vm.roll(blockNumber + 5);
+
         tokenAmount = 4.9 ether;
         buyPrice = sale.buyPriceCalculation(tokenAmount);
         console2.log("'buyPrice' for 4.9 tokens is %s", buyPrice);
@@ -104,6 +119,14 @@ contract BondingCurveSaleTest is Test {
         console2.log("'buyPrice' for 0.1 tokens is %s", buyPrice);
         vm.prank(user2);
         vm.deal(user2, 100 ether);
+
+        vm.expectRevert("Cooldown period has not expired yet");
+        blockNumber = block.number;
+        vm.roll(blockNumber + 4);
+        sale.buy{value: buyPrice}(tokenAmount);
+
+        blockNumber = block.number;
+        vm.roll(blockNumber + 1);
         sale.buy{value: buyPrice}(tokenAmount);
 
         console2.log("Current eth balance of contract: %s", address(sale).balance / 10 ** 18);

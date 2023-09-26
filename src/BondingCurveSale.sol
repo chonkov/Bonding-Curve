@@ -10,8 +10,13 @@ import "lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol";
 /// @author Georgi
 /// @notice Bonding curve token sale that uses the ERC1363
 contract BondingCurveSale is ERC1363, IERC1363Receiver {
+    event Buy(address indexed, uint256);
+    event Sell(address indexed, uint256);
+
     uint256 public constant basePrice = 1 ether;
     uint256 public constant pricePerToken = 1 ether;
+    mapping(address => uint256) public cooldown;
+    uint256 public constant cooldownPeriod = 5; // blocks
 
     constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
 
@@ -19,7 +24,11 @@ contract BondingCurveSale is ERC1363, IERC1363Receiver {
     /// @param amount uinst256 Amount of token to buy
     function buy(uint256 amount) external payable {
         require(msg.value == buyPriceCalculation(amount), "msg.value deos not match price of tokens");
+        require(block.number >= cooldown[msg.sender], "Cooldown period has not expired yet");
+        cooldown[msg.sender] = block.number + cooldownPeriod;
         _mint(msg.sender, amount);
+
+        emit Buy(msg.sender, amount);
     }
 
     /// @notice Automatic sell when tranfering to contract
@@ -31,9 +40,13 @@ contract BondingCurveSale is ERC1363, IERC1363Receiver {
         external
         returns (bytes4)
     {
+        require(block.number >= cooldown[from], "Cooldown period has not expired yet");
+        cooldown[from] = block.number + cooldownPeriod;
         (uint256 curveBasePrice, uint256 curveExtraPrice) = _calculatePrice(amount);
         _burn(address(this), amount);
         payable(from).transfer(curveBasePrice - curveExtraPrice);
+
+        emit Sell(msg.sender, amount);
         return type(IERC1363Receiver).interfaceId;
     }
 
