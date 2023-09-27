@@ -2,9 +2,10 @@
 pragma solidity 0.8.21;
 
 // import {Token} from "./Token.sol";
-import "lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol";
+import {Context} from "lib/openzeppelin-contracts/contracts/utils/Context.sol";
+import {ERC1363, ERC20} from "lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol";
 
-import "lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol";
+import {IERC1363Receiver} from "lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol";
 
 /// @title BondingCurveSale
 /// @author Georgi
@@ -20,12 +21,16 @@ contract BondingCurveSale is ERC1363, IERC1363Receiver {
 
     constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
 
+    modifier coolDown(address account) {
+        require(block.number >= cooldown[account], "Cooldown period has not expired yet");
+        cooldown[account] = block.number + cooldownPeriod;
+        _;
+    }
+
     /// @notice Buy tokens with ethers
     /// @param amount uinst256 Amount of token to buy
-    function buy(uint256 amount) external payable {
+    function buy(uint256 amount) external payable coolDown(msg.sender) {
         require(msg.value == buyPriceCalculation(amount), "msg.value deos not match price of tokens");
-        require(block.number >= cooldown[msg.sender], "Cooldown period has not expired yet");
-        cooldown[msg.sender] = block.number + cooldownPeriod;
         _mint(msg.sender, amount);
 
         emit Buy(msg.sender, amount);
@@ -38,10 +43,9 @@ contract BondingCurveSale is ERC1363, IERC1363Receiver {
     /// @param data bytes Additional data with no specified format
     function onTransferReceived(address operator, address from, uint256 amount, bytes memory data)
         external
+        coolDown(from)
         returns (bytes4)
     {
-        require(block.number >= cooldown[from], "Cooldown period has not expired yet");
-        cooldown[from] = block.number + cooldownPeriod;
         (uint256 curveBasePrice, uint256 curveExtraPrice) = _calculatePrice(amount);
         _burn(address(this), amount);
         payable(from).transfer(curveBasePrice - curveExtraPrice);

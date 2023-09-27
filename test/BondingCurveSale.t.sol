@@ -34,10 +34,13 @@ contract BondingCurveSaleTest is Test {
         assertEq(sale.currentPrice(), 1 ether);
     }
 
-    function testBuy() public {
+    function testBuyPrice() public {
         uint256 tokenAmount = 4 ether;
         uint256 buyPrice = sale.buyPriceCalculation(tokenAmount);
         console2.log("'buyPrice' for 4 tokens is %s", buyPrice);
+
+        buyPrice = sale.buyPriceCalculation(tokenAmount - 3 ether);
+        console2.log("'buyPrice' for 1 token is %s", buyPrice);
         // 12000000000000000000
         //  8000000000000000000
     }
@@ -49,7 +52,7 @@ contract BondingCurveSaleTest is Test {
 
         vm.deal(user1, 100 ether);
         vm.prank(user1);
-        vm.expectRevert();
+        vm.expectRevert("msg.value deos not match price of tokens");
         sale.buy{value: buyPrice}(tokenAmount + 1);
     }
 
