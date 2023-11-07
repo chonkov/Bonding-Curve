@@ -1,0 +1,109 @@
+❌
+INFO:Detectors:
+BondingCurveSale.onTransferReceived(address,address,uint256,bytes) (src/BondingCurveSale.sol#50-62) sends eth to arbitrary user
+Dangerous calls: - (success) = from.call{value: curveBasePrice - curveExtraPrice}() (src/BondingCurveSale.sol#57)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+
+✅
+INFO:Detectors:
+Token is re-used: - Token (src/Escrow.sol#10-14) - Token (src/Token.sol#10-78)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#name-reused
+
+✅
+INFO:Detectors:
+BondingCurveSale.\_calculatePrice(uint256) (src/BondingCurveSale.sol#78-82) performs a multiplication on the result of a division: - curveExtraPrice = (((amount _ pricePerToken) / 10 \*\* decimals()) _ (amount)) / (2 \* 10 \*\* decimals()) (src/BondingCurveSale.sol#81)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+
+✅
+INFO:Detectors:
+BondingCurveSale.constructor(string,string).\_name (src/BondingCurveSale.sol#28) shadows: - ERC20.\_name (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#45) (state variable)
+BondingCurveSale.constructor(string,string).\_symbol (src/BondingCurveSale.sol#28) shadows: - ERC20.\_symbol (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#46) (state variable)
+Token.constructor(string,string).\_name (src/Token.sol#16) shadows: - ERC20.\_name (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#45) (state variable)
+Token.constructor(string,string).\_symbol (src/Token.sol#16) shadows: - ERC20.\_symbol (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#46) (state variable)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#local-variable-shadowing
+
+❌
+INFO:Detectors:
+Reentrancy in Escrow.deposit(IERC20,address,uint256) (src/Escrow.sol#57-68):
+External calls: - token.safeTransferFrom(msg.sender,address(this),amount) (src/Escrow.sol#61)
+State variables written after the call(s): - accountBalance[msg.sender] = afterBal (src/Escrow.sol#64) - withdrawTime[msg.sender][to] = block.timestamp + 259200 (src/Escrow.sol#65)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+
+✅
+INFO:Detectors:
+Reentrancy in Escrow.deposit(IERC20,address,uint256) (src/Escrow.sol#57-68):
+External calls: - token.safeTransferFrom(msg.sender,address(this),amount) (src/Escrow.sol#61)
+Event emitted after the call(s): - Deposit(msg.sender,to,afterBal) (src/Escrow.sol#67)
+Reentrancy in BondingCurveSale.onTransferReceived(address,address,uint256,bytes) (src/BondingCurveSale.sol#50-62):
+External calls: - (success) = from.call{value: curveBasePrice - curveExtraPrice}() (src/BondingCurveSale.sol#57)
+Event emitted after the call(s): - Sell(msg.sender,amount) (src/BondingCurveSale.sol#60)
+Reentrancy in Escrow.withdraw(IERC20,address,uint256) (src/Escrow.sol#74-82):
+External calls: - token.safeTransfer(msg.sender,amount) (src/Escrow.sol#79)
+Event emitted after the call(s): - Withdraw(from,msg.sender,amount) (src/Escrow.sol#81)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+
+✅
+INFO:Detectors:
+Escrow.withdraw(IERC20,address,uint256) (src/Escrow.sol#74-82) uses timestamp for comparisons
+Dangerous comparisons: - require(bool,string)(block.timestamp > withdrawTime[from][msg.sender],Can't withdraw yet) (src/Escrow.sol#76)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+✅
+INFO:Detectors:
+ERC1363.\_checkOnTransferReceived(address,address,uint256,bytes) (lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol#115-136) uses assembly - INLINE ASM (lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol#131-133)
+ERC1363.\_checkOnApprovalReceived(address,uint256,bytes) (lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol#146-167) uses assembly - INLINE ASM (lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol#162-164)
+Address.\_revert(bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#231-243) uses assembly - INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Address.sol#236-239)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+
+❌
+INFO:Detectors:
+Token.\_beforeTokenTransfer(address,address,uint256) (src/Token.sol#74-77) compares to a boolean constant:
+-require(bool,string)(bannedAddress[to] == false,Banned address) (src/Token.sol#76)
+Token.\_beforeTokenTransfer(address,address,uint256) (src/Token.sol#74-77) compares to a boolean constant:
+-require(bool,string)(bannedAddress[from] == false,Banned address) (src/Token.sol#75)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+
+✅
+INFO:Detectors:
+Different versions of Solidity are used: - Version used: ['0.8.21', '^0.8.0', '^0.8.1'] - 0.8.21 (src/BondingCurveSale.sol#2) - 0.8.21 (src/Escrow.sol#2) - 0.8.21 (src/Token.sol#2) - ^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol#3) - ^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363.sol#3) - ^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol#3) - ^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Spender.sol#3) - ^0.8.0 (lib/openzeppelin-contracts/contracts/access/Ownable.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/Context.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol#4) - ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol#4) - ^0.8.1 (lib/openzeppelin-contracts/contracts/utils/Address.sol#4)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used
+
+✅
+INFO:Detectors:
+Pragma version^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/ERC1363.sol#3) allows old versions
+Pragma version^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363.sol#3) allows old versions
+Pragma version^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol#3) allows old versions
+Pragma version^0.8.0 (lib/erc1363-payable-token/contracts/token/ERC1363/IERC1363Spender.sol#3) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/access/Ownable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol#4) allows old versions
+Pragma version^0.8.1 (lib/openzeppelin-contracts/contracts/utils/Address.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/Context.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol#4) allows old versions
+Pragma version0.8.21 (src/BondingCurveSale.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.21 (src/Escrow.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.21 (src/Token.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+solc-0.8.21 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+✅
+INFO:Detectors:
+Low level call in SafeERC20.\_callOptionalReturnBool(IERC20,bytes) (lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol#134-142): - (success,returndata) = address(token).call(data) (lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol#139)
+Low level call in Address.sendValue(address,uint256) (lib/openzeppelin-contracts/contracts/utils/Address.sol#64-69): - (success) = recipient.call{value: amount}() (lib/openzeppelin-contracts/contracts/utils/Address.sol#67)
+Low level call in Address.functionCallWithValue(address,bytes,uint256,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#128-137): - (success,returndata) = target.call{value: value}(data) (lib/openzeppelin-contracts/contracts/utils/Address.sol#135)
+Low level call in Address.functionStaticCall(address,bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#155-162): - (success,returndata) = target.staticcall(data) (lib/openzeppelin-contracts/contracts/utils/Address.sol#160)
+Low level call in Address.functionDelegateCall(address,bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#180-187): - (success,returndata) = target.delegatecall(data) (lib/openzeppelin-contracts/contracts/utils/Address.sol#185)
+Low level call in BondingCurveSale.onTransferReceived(address,address,uint256,bytes) (src/BondingCurveSale.sol#50-62): - (success) = from.call{value: curveBasePrice - curveExtraPrice}() (src/BondingCurveSale.sol#57)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+
+✅
+INFO:Detectors:
+Function IERC20Permit.DOMAIN_SEPARATOR() (lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol#59) is not in mixedCase
+Parameter Token.banAddress(address).\_bannedAddress (src/Token.sol#40) is not in mixedCase
+Parameter Token.unbanAddress(address).\_unbannedAddress (src/Token.sol#48) is not in mixedCase
+Parameter Token.isAddressBanned(address).\_address (src/Token.sol#56) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
