@@ -35,14 +35,17 @@ contract Token is ERC20 {
 // contract, because of the fee, only 99 / 100 * 'X' of the total value will be actually transferred, therefore resulting in errors in the state of the
 // Escrow contract and the one of the token.
 
+// Deposit:
+// Implement hooks before and after the 'safeTransferFrom' method
+
 /// @title Escrow
 /// @author Georgi
 /// @notice Escrow contract that accepts ARBITRARY ERC20 tokens
 contract Escrow {
     using SafeERC20 for IERC20;
 
-    mapping(address => uint256) accountBalance;
-    mapping(address => mapping(address => uint256)) withdrawTime;
+    mapping(address => mapping(address => uint256)) public accountBalance;
+    mapping(address => mapping(address => mapping(address => uint256))) public withdrawTime;
 
     event Deposit(address indexed, address indexed, uint256);
     event Withdraw(address indexed, address indexed, uint256);
@@ -51,24 +54,38 @@ contract Escrow {
     /// @param token address An arbitrary token address used for making a deposit
     /// @param to address The address to which the tokens are to be transfered
     /// @param amount uint256 The amount of tokens transferred
-    function deposit(IERC20 token, address to, uint256 amount) external {
-        token.safeTransferFrom(msg.sender, address(this), amount); // A fee could potenitally be paid
-        uint256 actualBal = token.balanceOf(address(this));
-        accountBalance[msg.sender] = actualBal;
-        withdrawTime[msg.sender][to] = block.timestamp + 3 days;
+    function deposit(address token, address to, uint256 amount) external {
+        uint256 balBefore = IERC20(token).balanceOf(address(this));
 
-        emit Deposit(msg.sender, to, actualBal);
+        accountBalance[token][msg.sender] += amount;
+        withdrawTime[token][msg.sender][to] = block.timestamp + 3 days;
+
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount); // A fee could potenitally be paid
+        uint256 balAfter = IERC20(token).balanceOf(address(this));
+        assert(balAfter == balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+        emit Deposit(msg.sender, to, amount);
     }
 
     /// @notice Withdraw function
     /// @param token address An arbitrary token address used for transfering value
     /// @param from address The address to which the tokens are to be transfered
     /// @param amount uint256 The amount of tokens transferred
-    function withdraw(IERC20 token, address from, uint256 amount) external {
-        require(accountBalance[from] >= amount, "Insufficient amount");
-        require(block.timestamp >= withdrawTime[from][msg.sender], "Can't withdraw yet");
+    function withdraw(address token, address from, uint256 amount) external {
+        uint256 _withdrawTime = withdrawTime[token][from][msg.sender];
+        uint256 balBefore = IERC20(token).balanceOf(address(this));
 
-        token.safeTransfer(from, amount); // another fee would be paid if for the example the token is Tether
+        require(accountBalance[token][from] >= amount, "Insufficient amount");
+        require(block.timestamp > _withdrawTime, "Can't withdraw yet");
+        require(_withdrawTime > 0, "Not authorized to withdraw"); // If `_withdrawTime` == 0, then the caller can't withdraw because no deposit has been made
+
+        unchecked {
+            accountBalance[token][from] -= amount;
+        }
+
+        IERC20(token).safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+        uint256 balAfter = IERC20(token).balanceOf(address(this));
+        assert(balAfter == balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
 
         emit Withdraw(from, msg.sender, amount);
     }
