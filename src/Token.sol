@@ -70,8 +70,7 @@ contract Token is ERC1363, Ownable {
     /// @notice Use of _beforeTokenTransfer hook for ban mechanism
     /// @param from Address from which token will be transfered
     /// @param to Address to which token will be transfered
-    /// @param amount Amount of token to transfer
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal view override {
+    function _beforeTokenTransfer(address from, address to, uint256 /* amount*/ ) internal view override {
         require(bannedAddress[from] == false, "Banned address");
         require(bannedAddress[to] == false, "Banned address");
     }

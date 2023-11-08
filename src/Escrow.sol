@@ -4,15 +4,6 @@ pragma solidity 0.8.21;
 import {IERC20, ERC20} from "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import {SafeERC20} from "lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol";
 
-/// @title ERC20 Token
-/// @author Georgi
-/// @notice Simple ERC20 token for testing purposes
-contract Token is ERC20 {
-    constructor() ERC20("Token", "TKN") {
-        _mint(msg.sender, 10 ether);
-    }
-}
-
 // NOTE:
 
 // Problem 1:
