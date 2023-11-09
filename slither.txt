@@ -1,4 +1,4 @@
-❌
+✅
 INFO:Detectors:
 BondingCurveSale.onTransferReceived(address,address,uint256,bytes) (src/BondingCurveSale.sol#50-62) sends eth to arbitrary user
 Dangerous calls: - (success) = from.call{value: curveBasePrice - curveExtraPrice}() (src/BondingCurveSale.sol#57)
@@ -22,7 +22,7 @@ Token.constructor(string,string).\_name (src/Token.sol#16) shadows: - ERC20.\_na
 Token.constructor(string,string).\_symbol (src/Token.sol#16) shadows: - ERC20.\_symbol (lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol#46) (state variable)
 Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#local-variable-shadowing
 
-❌
+❌ - Fixed
 INFO:Detectors:
 Reentrancy in Escrow.deposit(IERC20,address,uint256) (src/Escrow.sol#57-68):
 External calls: - token.safeTransferFrom(msg.sender,address(this),amount) (src/Escrow.sol#61)
@@ -55,7 +55,7 @@ ERC1363.\_checkOnApprovalReceived(address,uint256,bytes) (lib/erc1363-payable-to
 Address.\_revert(bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#231-243) uses assembly - INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Address.sol#236-239)
 Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
 
-❌
+✅
 INFO:Detectors:
 Token.\_beforeTokenTransfer(address,address,uint256) (src/Token.sol#74-77) compares to a boolean constant:
 -require(bool,string)(bannedAddress[to] == false,Banned address) (src/Token.sol#76)
