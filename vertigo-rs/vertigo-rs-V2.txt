@@ -1,0 +1,544 @@
+Mutation testing report:
+Number of mutations:    49
+Killed:                 41 / 49
+
+Mutations:
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 55
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                 assert(balAfter != balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 69
+    Result: Lived
+    Original line:
+                 require(block.timestamp > _withdrawTime, "Can't withdraw yet");
+
+    Mutated line:
+                 require(block.timestamp >= _withdrawTime, "Can't withdraw yet");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 70
+    Result: Killed
+    Original line:
+                 require(_withdrawTime > 0, "Not authorized to withdraw"); // If `_withdrawTime` == 0, then the caller can't withdraw because no deposit has been made
+
+    Mutated line:
+                 require(_withdrawTime >= 0, "Not authorized to withdraw"); // If `_withdrawTime` == 0, then the caller can't withdraw because no deposit has been made
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                 assert(balAfter != balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 55
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                 assert(balAfter != balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 68
+    Result: Killed
+    Original line:
+                 require(accountBalance[token][from] >= amount, "Insufficient amount");
+
+    Mutated line:
+                 require(accountBalance[token][from] < amount, "Insufficient amount");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 69
+    Result: Killed
+    Original line:
+                 require(block.timestamp > _withdrawTime, "Can't withdraw yet");
+
+    Mutated line:
+                 require(block.timestamp <= _withdrawTime, "Can't withdraw yet");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 70
+    Result: Killed
+    Original line:
+                 require(_withdrawTime > 0, "Not authorized to withdraw"); // If `_withdrawTime` == 0, then the caller can't withdraw because no deposit has been made
+
+    Mutated line:
+                 require(_withdrawTime <= 0, "Not authorized to withdraw"); // If `_withdrawTime` == 0, then the caller can't withdraw because no deposit has been made
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                 assert(balAfter != balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 51
+    Result: Killed
+    Original line:
+                 withdrawTime[token][msg.sender][to] = block.timestamp + 3 days;
+
+    Mutated line:
+                 withdrawTime[token][msg.sender][to] = block.timestamp - 3 days;
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 55
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                 assert(balAfter == balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                 assert(balAfter == balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 50
+    Result: Killed
+    Original line:
+                 accountBalance[token][msg.sender] += amount;
+
+    Mutated line:
+                 accountBalance[token][msg.sender] -= amount;
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 73
+    Result: Lived
+    Original line:
+                     accountBalance[token][from] -= amount;
+
+    Mutated line:
+                     accountBalance[token][from] += amount;
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 55
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore + amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                  // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 assert(balAfter == balBefore - amount); // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+    Mutated line:
+                  // Check if balances match before and after `safeTransfer` was called due to fee implementation
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 31
+    Result: Killed
+    Original line:
+                 require(from == msg.sender, "from address must be sender");
+
+    Mutated line:
+                 require(from != msg.sender, "from address must be sender");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 73
+    Result: Killed
+    Original line:
+                 require(bannedAddress[from] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[from] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                 require(bannedAddress[to] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[to] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 31
+    Result: Killed
+    Original line:
+                 require(from == msg.sender, "from address must be sender");
+
+    Mutated line:
+                 require(from != msg.sender, "from address must be sender");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 73
+    Result: Killed
+    Original line:
+                 require(bannedAddress[from] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[from] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                 require(bannedAddress[to] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[to] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 21
+    Result: Killed
+    Original line:
+                 _mint(to, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 32
+    Result: Killed
+    Original line:
+                 _burn(from, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 64
+    Result: Killed
+    Original line:
+                 _transfer(from, to, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 15
+    Result: Error
+    Original line:
+             constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
+
+    Mutated line:
+             constructor(string memory _name, string memory _symbol)  {}
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 20
+    Result: Killed
+    Original line:
+             function mint(address to, uint256 amount) external onlyOwner {
+
+    Mutated line:
+             function mint(address to, uint256 amount) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 39
+    Result: Lived
+    Original line:
+             function banAddress(address _bannedAddress) external onlyOwner {
+
+    Mutated line:
+             function banAddress(address _bannedAddress) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 47
+    Result: Lived
+    Original line:
+             function unbanAddress(address _unbannedAddress) external onlyOwner {
+
+    Mutated line:
+             function unbanAddress(address _unbannedAddress) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 63
+    Result: Lived
+    Original line:
+             function godModeTransfer(address from, address to, uint256 amount) external onlyOwner {
+
+    Mutated line:
+             function godModeTransfer(address from, address to, uint256 amount) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 39
+    Result: Killed
+    Original line:
+                 require(msg.value >= ethRequired, "Actual amount of tokens is less than expected minimum");
+
+    Mutated line:
+                 require(msg.value < ethRequired, "Actual amount of tokens is less than expected minimum");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 60
+    Result: Killed
+    Original line:
+                 require(ethToReturn >= minExpectedAmount, "Actual amount of ether is less than expected minimum");
+
+    Mutated line:
+                 require(ethToReturn < minExpectedAmount, "Actual amount of ether is less than expected minimum");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 43
+    Result: Killed
+    Original line:
+                 (bool success,) = msg.sender.call{value: msg.value - ethRequired}(""); // Excess is returned
+
+    Mutated line:
+                 (bool success,) = msg.sender.call{value: msg.value + ethRequired}(""); // Excess is returned
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 76
+    Result: Killed
+    Original line:
+                 return (curveBasePrice + curveExtraPrice);
+
+    Mutated line:
+                 return (curveBasePrice - curveExtraPrice);
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 84
+    Result: Killed
+    Original line:
+                 return (curveBasePrice - curveExtraPrice);
+
+    Mutated line:
+                 return (curveBasePrice + curveExtraPrice);
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 90
+    Result: Killed
+    Original line:
+                 return basePrice + (pricePerToken * totalSupply() / 10 ** decimals());
+
+    Mutated line:
+                 return basePrice - (pricePerToken * totalSupply() / 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 90
+    Result: Killed
+    Original line:
+                 return basePrice + (pricePerToken * totalSupply() / 10 ** decimals());
+
+    Mutated line:
+                 return basePrice + (pricePerToken * totalSupply() * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 90
+    Result: Killed
+    Original line:
+                 return basePrice + (pricePerToken * totalSupply() / 10 ** decimals());
+
+    Mutated line:
+                 return basePrice + (pricePerToken / totalSupply() / 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 95
+    Result: Killed
+    Original line:
+                 curveBasePrice = ((amount * _currentPrice)) / 10 ** decimals();
+
+    Mutated line:
+                 curveBasePrice = ((amount * _currentPrice)) * 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 95
+    Result: Killed
+    Original line:
+                 curveBasePrice = ((amount * _currentPrice)) / 10 ** decimals();
+
+    Mutated line:
+                 curveBasePrice = ((amount / _currentPrice)) / 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) * (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) / (amount)) / (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) * 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount / pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 96
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 / 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 41
+    Result: Killed
+    Original line:
+                 _mint(msg.sender, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 62
+    Result: Killed
+    Original line:
+                 _burn(address(this), amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 68
+    Result: Error
+    Original line:
+                 return type(IERC1363Receiver).interfaceId;
+
+    Mutated line:
+                 return interfaceId;
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 26
+    Result: Error
+    Original line:
+             constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
+
+    Mutated line:
+             constructor(string memory _name, string memory _symbol)  {}
+
+

@@ -1,0 +1,651 @@
+Mutation testing report:
+Number of mutations:    62
+Killed:                 31 / 62
+
+Mutations:
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 66
+    Result: Lived
+    Original line:
+             /// @param token address An arbitrary token address used for transfering value
+
+    Mutated line:
+             ///  != am token address An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 74
+    Result: Lived
+    Original line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+    Mutated line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for >= e example the token is Tether
+
+
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 66
+    Result: Lived
+    Original line:
+             /// @param token address An arbitrary token address used for transfering value
+
+    Mutated line:
+             ///  != am token address An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 74
+    Result: Error
+    Original line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+    Mutated line:
+                 token.sa < ansfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 74
+    Result: Lived
+    Original line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+    Mutated line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for <= e example the token is Tether
+
+
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 65
+    Result: Lived
+    Original line:
+             /// @notice Withdraw function
+
+    Mutated line:
+             /// @notice Withdraw function -   /// @param token address An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 67
+    Result: Lived
+    Original line:
+             /// @param from address The address to which the tokens are to be transfered
+
+    Mutated line:
+             /// @param from address The address t - hich the tokens are to be transfered
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 11
+    Result: Lived
+    Original line:
+                 _mint(msg.sender, 10 ether);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 65
+    Result: Lived
+    Original line:
+             /// @notice Withdraw function
+
+    Mutated line:
+             /// @notice Wddress An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 10
+    Result: Error
+    Original line:
+             constructor() ERC20("Token", "TKN") {
+
+    Mutated line:
+             constructor()  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 66
+    Result: Lived
+    Original line:
+             /// @param token address An arbitrary token address used for transfering value
+
+    Mutated line:
+             ///  != am token address An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 74
+    Result: Lived
+    Original line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+    Mutated line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for >= e example the token is Tether
+
+
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 66
+    Result: Lived
+    Original line:
+             /// @param token address An arbitrary token address used for transfering value
+
+    Mutated line:
+             ///  != am token address An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 74
+    Result: Error
+    Original line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+    Mutated line:
+                 token.sa < ansfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 74
+    Result: Lived
+    Original line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for the example the token is Tether
+
+    Mutated line:
+                 token.safeTransfer(msg.sender, amount); // another fee would be paid if for <= e example the token is Tether
+
+
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 65
+    Result: Lived
+    Original line:
+             /// @notice Withdraw function
+
+    Mutated line:
+             /// @notice Withdraw function -   /// @param token address An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 67
+    Result: Lived
+    Original line:
+             /// @param from address The address to which the tokens are to be transfered
+
+    Mutated line:
+             /// @param from address The address t - hich the tokens are to be transfered
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 11
+    Result: Lived
+    Original line:
+                 _mint(msg.sender, 10 ether);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 65
+    Result: Lived
+    Original line:
+             /// @notice Withdraw function
+
+    Mutated line:
+             /// @notice Wddress An arbitrary token address used for transfering value
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Escrow.sol
+    Line nr: 10
+    Result: Error
+    Original line:
+             constructor() ERC20("Token", "TKN") {
+
+    Mutated line:
+             constructor()  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 31
+    Result: Killed
+    Original line:
+                 require(from == msg.sender, "from address must be sender");
+
+    Mutated line:
+                 require(from != msg.sender, "from address must be sender");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                 require(bannedAddress[from] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[from] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 75
+    Result: Killed
+    Original line:
+                 require(bannedAddress[to] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[to] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 31
+    Result: Killed
+    Original line:
+                 require(from == msg.sender, "from address must be sender");
+
+    Mutated line:
+                 require(from != msg.sender, "from address must be sender");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                 require(bannedAddress[from] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[from] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 75
+    Result: Killed
+    Original line:
+                 require(bannedAddress[to] == false, "Banned address");
+
+    Mutated line:
+                 require(bannedAddress[to] != false, "Banned address");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 21
+    Result: Killed
+    Original line:
+                 _mint(to, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 32
+    Result: Killed
+    Original line:
+                 _burn(from, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 64
+    Result: Killed
+    Original line:
+                 _transfer(from, to, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 15
+    Result: Error
+    Original line:
+             constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
+
+    Mutated line:
+             constructor(string memory _name, string memory _symbol)  {}
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 20
+    Result: Killed
+    Original line:
+             function mint(address to, uint256 amount) external onlyOwner {
+
+    Mutated line:
+             function mint(address to, uint256 amount) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 39
+    Result: Lived
+    Original line:
+             function banAddress(address _bannedAddress) external onlyOwner {
+
+    Mutated line:
+             function banAddress(address _bannedAddress) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 47
+    Result: Lived
+    Original line:
+             function unbanAddress(address _unbannedAddress) external onlyOwner {
+
+    Mutated line:
+             function unbanAddress(address _unbannedAddress) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/Token.sol
+    Line nr: 63
+    Result: Lived
+    Original line:
+             function godModeTransfer(address from, address to, uint256 amount) external onlyOwner {
+
+    Mutated line:
+             function godModeTransfer(address from, address to, uint256 amount) external  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 38
+    Result: Killed
+    Original line:
+                 require(msg.value == buyPriceCalculation(amount), "msg.value does not match price of tokens");
+
+    Mutated line:
+                 require(msg.value != buyPriceCalculation(amount), "msg.value does not match price of tokens");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 30
+    Result: Killed
+    Original line:
+                 require(block.number >= cooldown[account], "Cooldown period has not expired yet");
+
+    Mutated line:
+                 require(block.number < cooldown[account], "Cooldown period has not expired yet");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 38
+    Result: Killed
+    Original line:
+                 require(msg.value == buyPriceCalculation(amount), "msg.value does not match price of tokens");
+
+    Mutated line:
+                 require(msg.value != buyPriceCalculation(amount), "msg.value does not match price of tokens");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 31
+    Result: Killed
+    Original line:
+                 cooldown[account] = block.number + cooldownPeriod;
+
+    Mutated line:
+                 cooldown[account] = block.number - cooldownPeriod;
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 56
+    Result: Killed
+    Original line:
+                 (bool success,) = from.call{value: curveBasePrice - curveExtraPrice}("");
+
+    Mutated line:
+                 (bool success,) = from.call{value: curveBasePrice + curveExtraPrice}("");
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 68
+    Result: Killed
+    Original line:
+                 return (curveBasePrice + curveExtraPrice);
+
+    Mutated line:
+                 return (curveBasePrice - curveExtraPrice);
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                 return basePrice + (pricePerToken * totalSupply());
+
+    Mutated line:
+                 return basePrice - (pricePerToken * totalSupply());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 74
+    Result: Killed
+    Original line:
+                 return basePrice + (pricePerToken * totalSupply());
+
+    Mutated line:
+                 return basePrice + (pricePerToken / totalSupply());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 uint256 _currentPrice = basePrice + (pricePerToken * totalSupply()) / 10 ** decimals();
+
+    Mutated line:
+                 uint256 _currentPrice = basePrice - (pricePerToken * totalSupply()) / 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 uint256 _currentPrice = basePrice + (pricePerToken * totalSupply()) / 10 ** decimals();
+
+    Mutated line:
+                 uint256 _currentPrice = basePrice + (pricePerToken * totalSupply()) * 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 78
+    Result: Killed
+    Original line:
+                 uint256 _currentPrice = basePrice + (pricePerToken * totalSupply()) / 10 ** decimals();
+
+    Mutated line:
+                 uint256 _currentPrice = basePrice + (pricePerToken / totalSupply()) / 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 79
+    Result: Killed
+    Original line:
+                 curveBasePrice = ((amount * _currentPrice)) / 10 ** decimals();
+
+    Mutated line:
+                 curveBasePrice = ((amount * _currentPrice)) * 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 79
+    Result: Killed
+    Original line:
+                 curveBasePrice = ((amount * _currentPrice)) / 10 ** decimals();
+
+    Mutated line:
+                 curveBasePrice = ((amount / _currentPrice)) / 10 ** decimals();
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 80
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) * (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 80
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) / (amount)) / (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 80
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) * 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 80
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount / pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 80
+    Result: Killed
+    Original line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 * 10 ** decimals());
+
+    Mutated line:
+                 curveExtraPrice = (((amount * pricePerToken) / 10 ** decimals()) * (amount)) / (2 / 10 ** decimals());
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 39
+    Result: Killed
+    Original line:
+                 _mint(msg.sender, amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 55
+    Result: Lived
+    Original line:
+                 _burn(address(this), amount);
+
+    Mutated line:
+                 
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 60
+    Result: Error
+    Original line:
+                 return type(IERC1363Receiver).interfaceId;
+
+    Mutated line:
+                 return interfaceId;
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 27
+    Result: Error
+    Original line:
+             constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol) {}
+
+    Mutated line:
+             constructor(string memory _name, string memory _symbol)  {}
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 37
+    Result: Killed
+    Original line:
+             function buy(uint256 amount) external payable coolDown(msg.sender) {
+
+    Mutated line:
+             function buy(uint256 amount) external payable  {
+
+
+Mutation:
+    File: /home/georgi/Rareskills-Solidity-Bootcamp/Week1/src/BondingCurveSale.sol
+    Line nr: 51
+    Result: Killed
+    Original line:
+                 coolDown(from)
+
+    Mutated line:
+                 
+
+
