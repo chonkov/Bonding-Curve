@@ -86,6 +86,7 @@ contract EscrowTest is Test {
         vm.prank(user2);
         escrow.withdraw(address(token), user1, amount);
 
+        assertEq(escrow.accountBalance(address(token), user1), 0);
         assertEq(token.balanceOf(address(escrow)), 0);
         assertEq(token.balanceOf(user2), amount);
     }
@@ -102,6 +103,11 @@ contract EscrowTest is Test {
         vm.expectRevert("Insufficient amount");
         escrow.withdraw(address(token), user1, amount + 1);
 
+        vm.prank(user2);
+        vm.expectRevert("Can't withdraw yet");
+        escrow.withdraw(address(token), user1, amount);
+
+        vm.warp(timestamp + 3 days);
         vm.prank(user2);
         vm.expectRevert("Can't withdraw yet");
         escrow.withdraw(address(token), user1, amount);

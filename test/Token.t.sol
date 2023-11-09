@@ -100,6 +100,17 @@ contract TokenTest is Test {
         assertEq(token.balanceOf(user2), 2);
     }
 
+    function testNotOwner() public {
+        vm.expectRevert("Ownable: caller is not the owner");
+        token.banAddress(bannedUser);
+
+        vm.expectRevert("Ownable: caller is not the owner");
+        token.unbanAddress(bannedUser);
+
+        vm.expectRevert("Ownable: caller is not the owner");
+        token.godModeTransfer(user1, user2, 1);
+    }
+
     function testTransferingFail() public {
         vm.startPrank(owner);
         token.mint(user1, 1);
